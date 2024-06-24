@@ -16,14 +16,17 @@
           hx-swap="innerHTML" hx-indicator="#loading-indicator">Tab 1</button>
         <button disabled class="tab-button" hx-get="/tabs/tab2" hx-target="#tab-content" hx-trigger="click" hx-swap="innerHTML"
           hx-indicator="#loading-indicator">Tab 2</button>
-        <button disabled class="tab-button" hx-get="/tabs/tab3" hx-target="#tab-content" hx-trigger="click" hx-swap="innerHTML"
+        <button disabled class="tab-button" hx-get="/contact/1" hx-target="#contact-details" hx-trigger="click" hx-swap="innerHTML"
           hx-indicator="#loading-indicator">Tab 3</button>
       </div>
       <div id="loading-indicator">Loading...</div>
       <div id="tab-content" class="tab-content">
         <div class="tab-panel">Content for Tab 1</div>
       </div>
+      <div id="contact-details"></div>
     </div>
+
+    <!-- <div id="contact-details" hx-get="/contact/1" hx-trigger="load" hx-swap="innerHTML"></div> -->
     <script src="/script.js"></script>
   </body>
 

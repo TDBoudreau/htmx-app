@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const tabButtons = document.querySelectorAll('.tab-button');
   const tabContent = document.getElementById('tab-content');
+  const contactDetails = document.getElementById('contact-details');
   const loadingIndicator = document.getElementById('loading-indicator');
   let isLoading = false;
 
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       button.classList.add('active');
       // Clear the content and show the loading indicator
       tabContent.style.display = 'none';
+      contactDetails.style.display = 'none'
       loadingIndicator.style.display = 'block';
       isLoading = true;
 
@@ -26,9 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.body.addEventListener('htmx:afterOnLoad', (event) => {
+    const target = event.detail.target;
+    
+    if (!target || !target.classList.contains('tab-content')) {
+      tabContent.style.display = 'none'
+      contactDetails.style.display = 'block';
+    } else {
+      contactDetails.style.display = 'none'
+      tabContent.style.display = 'block'
+    }
+    
     // Hide the loading indicator after content is loaded
     loadingIndicator.style.display = 'none';
-    tabContent.style.display = 'block'
     isLoading = false;
 
     // Re-enable all buttons
