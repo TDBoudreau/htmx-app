@@ -37,6 +37,14 @@ body {
   border-top: none;
 }
 
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
 #loading-indicator {
   text-align: center;
   padding: 10px;

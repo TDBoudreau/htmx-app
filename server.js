@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+const utils = require('./helpers/utils.js')
 const TABS = require('./data/tabContent.js')
 
 // Server index.html at root endpoint
@@ -33,22 +34,25 @@ app.get('/tabs', (req, res) => {
 // Simulate delay for tab content loading
 const simulateDelay = (res, content) => {
   setTimeout(() => {
-      res.send(content);
+    res.send(content);
   }, Math.random() * 2000); // Random delay between 0 and 2 seconds
 };
 
 app.use(express.static('public'));
 
 app.get('/tabs/tab1', (req, res) => {
-  simulateDelay(res, '<div class="tab-panel">Content for Tab 1</div>');
+  const ret = utils.elementWrapper('Content for Tab 1', 'div', '', 'tab-panel active');
+  simulateDelay(res, ret);
 });
 
 app.get('/tabs/tab2', (req, res) => {
-  simulateDelay(res, '<div class="tab-panel">Content for Tab 2</div>');
+  const ret = utils.elementWrapper('Content for Tab 2', 'div', '', 'tab-panel active');
+  simulateDelay(res, ret);
 });
 
 app.get('/tabs/tab3', (req, res) => {
-  simulateDelay(res, '<div class="tab-panel">Content for Tab 3</div>');
+  const ret = utils.elementWrapper('Content for Tab 3', 'div', '', 'tab-panel active');
+  simulateDelay(res, ret);
 });
 
 app.listen(port, () => {
