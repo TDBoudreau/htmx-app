@@ -35,6 +35,7 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-top: none;
+  display: none;
 }
 
 .tab-panel {

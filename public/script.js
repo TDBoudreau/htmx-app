@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Add active class to the clicked button
       button.classList.add('active');
       // Clear the content and show the loading indicator
-      tabContent.innerHTML = '';
+      tabContent.style.display = 'none';
       loadingIndicator.style.display = 'block';
       isLoading = true;
 
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('htmx:afterOnLoad', (event) => {
     // Hide the loading indicator after content is loaded
     loadingIndicator.style.display = 'none';
+    tabContent.style.display = 'block'
     isLoading = false;
 
     // Re-enable all buttons
