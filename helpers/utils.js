@@ -1,6 +1,9 @@
 class utils {
   static elementWrapper = (content, element, attributes = "", classes = "", styles = "") => {
-    return `<${element}${attributes ? ' ' + attributes : ''}${classes ? ' class="' + classes + '"' : ''}>${content}</${element}>`
+    const attribs = attributes ? ' ' + attributes : '';
+    const cssClasses = classes ? ' class="' + classes + '"' : '';
+
+    return `<${element}${attribs}${cssClasses}>${content}</${element}>`
   }
 }
 
