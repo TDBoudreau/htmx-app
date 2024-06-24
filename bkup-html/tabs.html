@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX App</title>
+    <script src="https://unpkg.com/htmx.org@2.0.0"
+      integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw"
+      crossorigin="anonymous"></script>
+  </head>
+
+  <style>
+    .tab {
+      display: none;
+    }
+
+    .tab.active {
+      display: block;
+    }
+
+    .tabs-menu button {
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .tabs-menu button.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .loading {
+      display: none;
+    }
+
+    .loading.active {
+      display: block;
+    }
+
+    .hidden-content {
+      display: none !important;
+    }
+  </style>
+  </head>
+
+  <body>
+    <div class="tabs-menu">
+      <button hx-get="/tabs/tab1" hx-target="#tab-content" class="active">Tab 1</button>
+      <button hx-get="/tabs/tab2" hx-target="#tab-content">Tab 2</button>
+      <button hx-get="/tabs/tab3" hx-target="#tab-content">Tab 3</button>
+    </div>
+
+    <div id="tab-content" class="tab active" hx-get="/tabs/tab1" hx-trigger="load">
+      <!-- Tab content will be loaded here -->
+    </div>
+
+    <div id="loading-indicator" class="loading">Loading...</div>
+
+    <script>
+      document.addEventListener('htmx:beforeRequest', function (event) {
+        document.getElementById('loading-indicator').classList.add('active');
+        document.getElementById('tab-content').classList.add('hidden-content');
+
+        // Update the active tab button immediately
+        if (event.target.tagName === 'BUTTON' && event.target.innerText.includes("Tab")) {
+          document.querySelectorAll('.tabs-menu button').forEach(button => {
+            button.classList.remove('active');
+          });
+          event.target.classList.add('active');
+        }
+      });
+
+      document.addEventListener('htmx:afterSwap', function (event) {
+        if (event.detail.target.id === 'tab-content') {
+          document.getElementById('loading-indicator').classList.remove('active');
+          document.getElementById('tab-content').classList.remove('hidden-content');
+        }
+      });
+
+      document.addEventListener('htmx:afterRequest', function (event) {
+        document.getElementById('loading-indicator').classList.remove('active');
+      });
+    </script>
+
+    <button hx-get="/api/greet" hx-target="#greeting">Get Greeting</button>
+    <div id="greeting"></div>
+  </body>
+
+</html>

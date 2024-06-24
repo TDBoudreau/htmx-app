@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX App</title>
+    <script src="https://unpkg.com/htmx.org@2.0.0"
+      integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw"
+      crossorigin="anonymous"></script>
+  </head>
+  <style>
+    .tabs-nav {
+      padding-bottom: 20px;
+    }
+
+    .tabs-menu button {
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .tabs-menu button.active {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+
+  <body>
+    <h1>Welcome to the HTMX App</h1>
+    <div class="tabs-menu tabs-nav">
+      <button class="active" hx-get="/tabs" hx-target="#tab-content">Tabs</button>
+      <button></button>
+      <button></button>
+    </div>
+
+    <div id="tab-content" hx-get="/tabs" hx-trigger="load"></div>
+
+    <div id="loading-indicator" class="loading">Loading...</div>
+
+  </body>
+
+</html>

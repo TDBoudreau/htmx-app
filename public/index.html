@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab System with HTMX</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+  </head>
+
+  <body>
+    <div class="tab-container">
+      <div class="tabs">
+        <button disabled class="tab-button active" hx-get="/tabs/tab1" hx-target="#tab-content" hx-trigger="load, click"
+          hx-swap="innerHTML" hx-indicator="#loading-indicator">Tab 1</button>
+        <button disabled class="tab-button" hx-get="/tabs/tab2" hx-target="#tab-content" hx-trigger="click" hx-swap="innerHTML"
+          hx-indicator="#loading-indicator">Tab 2</button>
+        <button disabled class="tab-button" hx-get="/tabs/tab3" hx-target="#tab-content" hx-trigger="click" hx-swap="innerHTML"
+          hx-indicator="#loading-indicator">Tab 3</button>
+      </div>
+      <div id="loading-indicator">Loading...</div>
+      <div id="tab-content" class="tab-content">
+        <div class="tab-panel">Content for Tab 1</div>
+      </div>
+    </div>
+    <script src="/script.js"></script>
+  </body>
+
+</html>
